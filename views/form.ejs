@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Recipe</title>
+</head>
+<body>
+  <h1>Add a New Recipe</h1>
+  <form action="/recipes" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description"><br>
+
+    <label for="icon">Icon URL:</label>
+    <input type="text" id="icon" name="icon"><br>
+
+    <h3>Ingredients:</h3>
+    <div id="ingredients">
+      <div class="ingredient">
+        <label for="ingredient_name">Name:</label>
+        <input type="text" name="ingredients[0][name]" required><br>
+
+        <label for="ingredient_icon">Icon URL:</label>
+        <input type="text" name="ingredients[0][icon]" required><br>
+      </div>
+    </div>
+    <button type="button" onclick="addIngredient()">Add Ingredient</button>
+
+    <h3>Steps:</h3>
+    <div id="steps">
+      <div class="step">
+        <label for="step_title">Title:</label>
+        <input type="text" name="steps[0][title]" required><br>
+
+        <label for="step_description">Description:</label>
+        <textarea name="steps[0][description]" required></textarea><br>
+      </div>
+    </div>
+    <button type="button" onclick="addStep()">Add Step</button>
+
+    <button type="submit">Add Recipe</button>
+  </form>
+
+  <script>
+    let ingredientIndex = 1;
+    let stepIndex = 1;
+
+    function addIngredient() {
+      const ingredientsDiv = document.getElementById('ingredients');
+      const newIngredient = `
+        <div class="ingredient">
+          <label for="ingredient_name">Name:</label>
+          <input type="text" name="ingredients[${ingredientIndex}][name]" required><br>
+          <label for="ingredient_icon">Icon URL:</label>
+          <input type="text" name="ingredients[${ingredientIndex}][icon]" required><br>
+        </div>`;
+      ingredientsDiv.insertAdjacentHTML('beforeend', newIngredient);
+      ingredientIndex++;
+    }
+
+    function addStep() {
+      const stepsDiv = document.getElementById('steps');
+      const newStep = `
+        <div class="step">
+          <label for="step_title">Title:</label>
+          <input type="text" name="steps[${stepIndex}][title]" required><br>
+          <label for="step_description">Description:</label>
+          <textarea name="steps[${stepIndex}][description]" required></textarea><br>
+        </div>`;
+      stepsDiv.insertAdjacentHTML('beforeend', newStep);
+      stepIndex++;
+    }
+  </script>
+</body>
+</html>

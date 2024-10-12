@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recipes</title>
+</head>
+<body>
+  <h1>Recipes List</h1>
+  <ul>
+    <% recipes.forEach(recipe => { %>
+      <li><%= recipe.name %></li>
+    <% }); %>
+  </ul>
+</body>
+</html>
